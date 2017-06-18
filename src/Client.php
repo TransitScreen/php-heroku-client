@@ -222,16 +222,9 @@ class Client
      */
     protected function processResponse(Response $httpResponse)
     {
-        // Build the API response from the HTTP response body.
+        // Attempt to build the API response from the HTTP response body.
         $apiResponse = json_decode($httpResponse->getBody()->getContents());
         $httpResponse->getBody()->rewind(); // Rewind the stream to make future access easier.
-
-        // Check for JSON decoding errors.
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new JsonDecodingException(
-                'JSON error while decoding Heroku API response: ' . json_last_error_msg()
-            );
-        }
 
         // Check for API errors.
         // @see https://devcenter.heroku.com/articles/platform-api-reference#statuses
@@ -243,6 +236,13 @@ class Client
                 empty($apiResponse->id) ? 'no error ID found' : $apiResponse->id,
                 empty($apiResponse->message) ? 'no error message found' : $apiResponse->message
             ));
+        }
+
+        // Check for JSON decoding errors.
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new JsonDecodingException(
+                'JSON error while decoding Heroku API response: ' . json_last_error_msg()
+            );
         }
 
         return $apiResponse;
