@@ -11,7 +11,7 @@ use Http\Mock\Client as MockHttpClient;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers Client
+ * @covers HerokuClient\Client
  */
 class ClientTest extends TestCase
 {
