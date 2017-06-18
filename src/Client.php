@@ -56,6 +56,7 @@ class Client
      * Constructor
      *
      * @param array $config  An optional array of class properties and values to be set
+     *
      * @throws MissingApiKeyException
      */
     public function __construct(array $config = [])
@@ -183,8 +184,9 @@ class Client
      * Build an API request.
      *
      * @see Client::execute()    For parameter definitions
-     * @throws JsonEncodingException
      * @return RequestInterface  PSR-7 Request object representing the desired interaction.
+     *
+     * @throws JsonEncodingException
      */
     protected function buildRequest($method, $path, $body = null, array $customHeaders = [])
     {
@@ -219,9 +221,10 @@ class Client
      * @see https://devcenter.heroku.com/articles/platform-api-reference#errors
      *
      * @param ResponseInterface $httpResponse  Heroku API response as a PSR-7 Response object
-     * @throws JsonDecodingException
+     * @return \stdClass                       JSON-decoded API result
+     *
      * @throws BadHttpStatusException
-     * @return \stdClass              JSON-decoded API result
+     * @throws JsonDecodingException
      */
     protected function processResponse(ResponseInterface $httpResponse)
     {
