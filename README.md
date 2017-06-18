@@ -5,7 +5,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/TransitScreen/php-heroku-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/TransitScreen/php-heroku-client)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/TransitScreen/php-heroku-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/TransitScreen/php-heroku-client)
 
-A client class for the [Heroku Platform API](https://devcenter.heroku.com/articles/platform-api-reference)
+A PHP client for the Heroku Platform API, similar to [platform-api](https://github.com/heroku/platform-api) for Ruby and [node-heroku-client](https://github.com/heroku/node-heroku-client) for Node.js. With it you can create and alter Heroku apps, install or remove add-ons, scale resources up and down, and use any other capabilities documented by the [Platform API Reference](https://devcenter.heroku.com/articles/platform-api-reference).
 
 ## Features
 - Reads `HEROKU_API_KEY` for zero-config use
@@ -14,7 +14,6 @@ A client class for the [Heroku Platform API](https://devcenter.heroku.com/articl
 - Pass cURL options and custom request headers
 - Informative error handling for authentication, JSON, and HTTP errors
 - Coded to PSR-7 (Request/Response) and HTTPlug (HttpClient) interfaces
-
 
 ## Requirements
 - PHP 5.6+
@@ -68,6 +67,7 @@ new HerokuClient([
     ],
 ]);
 ```
+
 ## Making calls
 Make calls using the client's `get()`, `delete()`, `head()`, `patch()`, and `post()` methods. The first argument is always the required `string` path and the last is always an optional `array` of custom headers. `patch()` and `post()` take an `array` or `object` body as the second argument.
 - See the [Quick Start](#quick-start) for examples with and without a body.
@@ -84,6 +84,7 @@ if ($heroku->getLastHttpResponse()->getStatusCode() == 206) {
     $page2 = $heroku->get('apps', ['Range' => $nextRange]);
 }
 ```
+
 ## Exceptions thrown
 - `BadHttpStatusException`
 - `JsonDecodingException`
