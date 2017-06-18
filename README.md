@@ -1,4 +1,10 @@
 # PHP Heroku Client
+[![Latest Version](https://img.shields.io/github/release/TransitScreen/php-heroku-client.svg?style=flat-square)](https://github.com/TransitScreen/php-heroku-client/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Build Status](https://img.shields.io/travis/TransitScreen/php-heroku-client.svg?style=flat-square)](https://travis-ci.org/TransitScreen/php-heroku-client)
+[![Quality Score](https://img.shields.io/scrutinizer/g/TransitScreen/php-heroku-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/TransitScreen/php-heroku-client)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/TransitScreen/php-heroku-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/TransitScreen/php-heroku-client)
+
 A client class for the [Heroku Platform API](https://devcenter.heroku.com/articles/platform-api-reference)
 
 ## Features
