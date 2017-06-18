@@ -3,7 +3,6 @@
 namespace HerokuClient;
 
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use HerokuClient\Exception\BadHttpStatusException;
 use HerokuClient\Exception\JsonDecodingException;
 use HerokuClient\Exception\JsonEncodingException;
@@ -12,6 +11,8 @@ use Http\Client\Curl\Client as CurlHttpClient;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Message\StreamFactory\GuzzleStreamFactory;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Interact with the Heroku Platform API.
@@ -42,12 +43,12 @@ class Client
     protected $httpClient;
 
     /**
-     * @var Request $lastHttpRequest  PSR-7 Request object from the most recent API call
+     * @var RequestInterface $lastHttpRequest  PSR-7 Request object from the most recent API call
      */
     protected $lastHttpRequest;
 
     /**
-     * @var Response $lastHttpResponse  PSR-7 Response object from the most recent API call
+     * @var ResponseInterface $lastHttpResponse  PSR-7 Response object from the most recent API call
      */
     protected $lastHttpResponse;
 
@@ -126,7 +127,7 @@ class Client
     /**
      * Get the most recent HTTP request.
      *
-     * @return Request  PSR-7 Request object from the most recent API call
+     * @return RequestInterface  PSR-7 Request object from the most recent API call
      */
     public function getLastHttpRequest()
     {
@@ -136,7 +137,7 @@ class Client
     /**
      * Get the most recent HTTP response.
      *
-     * @return Response  PSR-7 Response object from the most recent API call
+     * @return ResponseInterface  PSR-7 Response object from the most recent API call
      */
     public function getLastHttpResponse()
     {
@@ -181,12 +182,14 @@ class Client
     /**
      * Build an API request.
      *
-     * @see Client::execute()  For parameter definitions
+     * @see Client::execute()    For parameter definitions
      * @throws JsonEncodingException
-     * @return Request         PSR-7 Request object representing the desired interaction.
+     * @return RequestInterface  PSR-7 Request object representing the desired interaction.
      */
     protected function buildRequest($method, $path, $body = null, array $customHeaders = [])
     {
+        $headers = [];
+
         // If a body was included, add it to the request.
         if (isset($body)) {
             $headers['Content-Type'] = 'application/json';
@@ -215,12 +218,12 @@ class Client
      * @see https://devcenter.heroku.com/articles/platform-api-reference#statuses
      * @see https://devcenter.heroku.com/articles/platform-api-reference#errors
      *
-     * @param Response $httpResponse  Heroku API response as a PSR-7 Response object
+     * @param ResponseInterface $httpResponse  Heroku API response as a PSR-7 Response object
      * @throws JsonDecodingException
      * @throws BadHttpStatusException
      * @return \stdClass              JSON-decoded API result
      */
-    protected function processResponse(Response $httpResponse)
+    protected function processResponse(ResponseInterface $httpResponse)
     {
         // Attempt to build the API response from the HTTP response body.
         $apiResponse = json_decode($httpResponse->getBody()->getContents());

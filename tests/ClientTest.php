@@ -1,6 +1,6 @@
 <?php
 
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Response;
 use HerokuClient\Client as HerokuClient;
 use HerokuClient\Exception\BadHttpStatusException;
 use HerokuClient\Exception\JsonDecodingException;
@@ -24,7 +24,7 @@ class ClientTest extends TestCase
         // Create a mock HTTP client that will always return something nice.
         $this->mockHttpClient = new MockHttpClient();
         $this->mockHttpClient->addResponse(
-            new Psr7\Response(200, [], '{}')
+            new Response(200, [], '{}')
         );
 
         // Create a Heroku client for use by tests that only need a standard one.
@@ -67,7 +67,7 @@ class ClientTest extends TestCase
         // Create an HTTP client that will always return a bad JSON body.
         $mockHttpClient = new MockHttpClient();
         $mockHttpClient->addResponse(
-            new Psr7\Response(200, [], '{"a": 1 ] }')
+            new Response(200, [], '{"a": 1 ] }')
         );
 
         // Attempt an API call.
@@ -80,7 +80,7 @@ class ClientTest extends TestCase
 
         // Create an HTTP client that will always return an HTTP 404 error response.
         $mockHttpClient = new MockHttpClient();
-        $mockHttpClient->addResponse(new Psr7\Response(404));
+        $mockHttpClient->addResponse(new Response(404));
 
         // Attempt an API call.
         (new HerokuClient(['httpClient' => $mockHttpClient]))->get('some/path');
