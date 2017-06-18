@@ -11,7 +11,7 @@ use Http\Mock\Client as MockHttpClient;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers Client
+ * @covers HerokuClient\Client
  */
 class ClientTest extends TestCase
 {
@@ -50,6 +50,21 @@ class ClientTest extends TestCase
 
         // Instantiate the client without providing an API key.
         new HerokuClient();
+    }
+
+    /**
+     * @dataProvider httpMethodsProvider
+     */
+    public function testHttpMethodWrappers($httpMethod)
+    {
+        // Attempt a call using the provided HTTP method.
+        $this->client->$httpMethod('some/path');
+
+        // Assert the proper method was used.
+        $this->assertEquals(
+            $httpMethod,
+            $this->client->getLastHttpRequest()->getMethod()
+        );
     }
 
     public function testUnencodableRequestJsonThrowsException()
@@ -135,5 +150,19 @@ class ClientTest extends TestCase
 
         // Assert that the we can access the body without first rewinding the stream.
         $this->assertNotEmpty($this->client->getLastHttpResponse()->getBody()->getContents());
+    }
+
+    /**
+     * Provides all HTTP methods implemented by this client.
+     */
+    public function httpMethodsProvider()
+    {
+        return [
+            ['GET'],
+            ['DELETE'],
+            ['HEAD'],
+            ['PATCH'],
+            ['POST'],
+        ];
     }
 }
