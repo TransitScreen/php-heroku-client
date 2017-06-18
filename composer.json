@@ -1,0 +1,38 @@
+{
+    "name": "php-heroku-client/php-heroku-client",
+    "type": "library",
+    "description": "A PHP client for the Heroku Platform API",
+    "keywords": ["heroku"],
+    "homepage": "https://github.com/TransitScreen/php-heroku-client",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ethan Pooley",
+            "homepage": "https://github.com/ethanpooley/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "guzzlehttp/psr7": "^1.0",
+        "php-http/message": "^1.5",
+        "php-http/curl-client": "^1.7",
+        "psr/http-message": "^1.0"
+    },
+    "require-dev": {
+        "php-http/mock-client": "^1.0",
+        "ext-curl": "*",
+        "ext-mbstring": "*",
+        "phpunit/phpunit": "~5.5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "HerokuClient\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HerokuClient\\Test\\": "tests"
+        }
+    }
+}
