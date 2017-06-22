@@ -101,6 +101,27 @@ class ClientTest extends TestCase
         (new HerokuClient(['httpClient' => $mockHttpClient]))->get('some/path');
     }
 
+    public function testBadHttpResponsesCanBeExamined()
+    {
+        // Create an HTTP client that will always return an HTTP 404 error response.
+        $mockHttpClient = new MockHttpClient();
+        $mockHttpClient->addResponse(new Response(404));
+        $heroku = new HerokuClient(['httpClient' => $mockHttpClient]);
+
+        // Attempt an API call.
+        try {
+            $heroku->get('some/path');
+        } catch (BadHttpStatusException $exception) {
+            // Allow execution to continue.
+        }
+
+        // Assert that we can read the expected status code from the response.
+        $this->assertEquals(
+            404,
+            $heroku->getLastHttpResponse()->getStatusCode()
+        );
+    }
+
     public function testDefaultHttpClientIsCreated()
     {
         // Assert that a suitable HTTP client will be created if none is provided at instantiation.
