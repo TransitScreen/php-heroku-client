@@ -163,19 +163,19 @@ class Client
         // Build the request.
         $request = $this->buildRequest($method, $path, $body, $customHeaders);
 
+        // Store the PSR-7 Request object for future examination and use. Redact the API key
+        // so it isn't unwittingly propagated as a result of this feature.
+        $this->lastHttpRequest = $request->withHeader('Authorization', 'Bearer {REDACTED}');
+
         // Make the API call.
         $response = $this->httpClient->sendRequest($request);
 
+        // Store the PSR-7 Response object for future examination and use. Heroku uses headers
+        // as a secondary communication channel for range, rate limit, and caching information.
+        $this->lastHttpResponse = $response;
+
         // Process the response.
         $apiResponse = $this->processResponse($response);
-
-        // Store the underlying PSR-7 Request and Response objects for future examination and use.
-        // The Request will be useful primarily for debugging interaction attempts; the Response
-        // is sometimes a necessity because Heroku uses headers as a secondary communication
-        // channel for range, rate limit, and caching information. We redact the API key from
-        // the Request so that it doesn't get unwittingly propagated as a result of this feature.
-        $this->lastHttpRequest = $request->withHeader('Authorization', 'Bearer {REDACTED}');
-        $this->lastHttpResponse = $response;
 
         return $apiResponse;
     }
