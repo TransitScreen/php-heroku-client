@@ -86,10 +86,12 @@ if ($heroku->getLastHttpResponse()->getStatusCode() == 206) {
 ```
 
 ## Reacting to problems
-You may wish to recognize and react to specific error conditions. In this example we use the API's [data integrity mechanism](https://devcenter.heroku.com/articles/platform-api-reference#data-integrity) to require that the requested data hasn't changed since we last received it. If it has, we will receive a `412 Precondition Failed` response. We handle that case specially, then catch more general situations:
+You may wish to recognize and react to specific error conditions. In this example we use the API's [data integrity mechanism](https://devcenter.heroku.com/articles/platform-api-reference#data-integrity) to require that the requested data hasn't changed since an earlier call. If it has, we will receive a `412 Precondition Failed` response. We handle that case specially, then catch more general situations:
 ```php
+use HerokuClient\Exception\BadHttpStatusException;
+
 try {
-    $heroku->get('some/path', ['If-Match' => $eTag]);
+    $heroku->get('some/path', ['If-Match' => $eTagFromEarlierCall]);
 } catch (BadHttpStatusException $exception) {
     if ($heroku->getLastHttpResponse()->getStatusCode() == 412) {
         // React to the fact that our requested data has changed.
