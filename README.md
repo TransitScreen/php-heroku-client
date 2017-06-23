@@ -85,11 +85,29 @@ if ($heroku->getLastHttpResponse()->getStatusCode() == 206) {
 }
 ```
 
+## Reacting to problems
+You may wish to recognize and react to specific error conditions. In this example we use the API's [data integrity mechanism](https://devcenter.heroku.com/articles/platform-api-reference#data-integrity) to require that the requested data hasn't changed since we last received it. If it has, we will receive a `412 Precondition Failed` response. We handle that case specially, then catch more general situations:
+```php
+try {
+    $heroku->get('some/path', ['If-Match' => $eTag]);
+} catch (BadHttpStatusException $exception) {
+    if ($heroku->getLastHttpResponse()->getStatusCode() == 412) {
+        // React to the fact that our requested data has changed.
+    } else {
+        // React to all other bad HTTP status codes.
+    }
+} catch (\Exception $exception) {
+    // React to all other problems.
+}
+```
+
 ## Exceptions thrown
 - `BadHttpStatusException`
 - `JsonDecodingException`
 - `JsonEncodingException`
 - `MissingApiKeyException`
+
+In addition to exceptions thrown directly from this API client, [standardized exceptions](http://docs.php-http.org/en/latest/httplug/exceptions.html) may bubble up from the HTTPlug client implementation in use.
 
 ## Contributing
 Pull Requests are welcome. Consider filing an issue first to discuss your needs/plans. Running `vendor/bin/phpunit` will run all tests. This project follows [the PSR-2 coding standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md), so contributions should do likewise.
