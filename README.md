@@ -9,15 +9,15 @@ A PHP client for the Heroku Platform API, similar to [platform-api](https://gith
 
 ## Features
 - Reads `HEROKU_API_KEY` for zero-config use
-- Exposes response headers—necessary for some API functionality
-- Use the default cURL-based HTTP client or provide your own
-- Pass cURL options and custom request headers
-- Informative error handling for authentication, JSON, and HTTP errors
-- Coded to PSR-7 (Request/Response) and HTTPlug (HttpClient) interfaces
+- Exposes response headers (necessary for some API functionality)
+- Uses a built-in cURL-based HTTP client or one that you provide
+- Accepts cURL options and custom request headers
+- Throws informative exceptions for authentication, JSON, and HTTP errors
+- Designed around PSR-7 (Request/Response) and HTTPlug (HttpClient) interfaces
 
 ## Requirements
-- PHP 5.6+
-- cURL (unless providing your own HTTP client)
+- PHP 5.6 / 7 or HHVM
+- cURL (unless providing a different HTTP client)
 
 ## Installation
 ```
