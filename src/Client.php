@@ -184,7 +184,7 @@ class Client
      * Build an API request.
      *
      * @see Client::execute()    For parameter definitions
-     * @return RequestInterface  PSR-7 Request object representing the desired interaction.
+     * @return RequestInterface  PSR-7 Request object representing the desired interaction
      *
      * @throws JsonEncodingException
      */
@@ -234,7 +234,7 @@ class Client
 
         // Check for API errors.
         // @see https://devcenter.heroku.com/articles/platform-api-reference#statuses
-        // @see also https://devcenter.heroku.com/articles/platform-api-reference#errors
+        // @see https://devcenter.heroku.com/articles/platform-api-reference#errors
         if ($httpResponse->getStatusCode() >= 400) {
             throw new BadHttpStatusException(sprintf(
                 'Heroku API error: HTTP code %s [%s] %s',
