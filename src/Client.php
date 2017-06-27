@@ -174,10 +174,7 @@ class Client
         // as a secondary communication channel for range, rate limit, and caching information.
         $this->lastHttpResponse = $response;
 
-        // Process the response.
-        $apiResponse = $this->processResponse($response);
-
-        return $apiResponse;
+        return $this->processResponse($response);
     }
 
     /**
