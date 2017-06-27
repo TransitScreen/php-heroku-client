@@ -13,11 +13,11 @@ A PHP client for the Heroku Platform API, similar to [platform-api](https://gith
 - Uses a built-in cURL-based HTTP client or one that you provide
 - Accepts cURL options and custom request headers
 - Throws informative exceptions for authentication, JSON, and HTTP errors
-- Designed around PSR-7 (Request/Response) and HTTPlug (HttpClient) interfaces
+- Designed around [PSR-7](http://www.php-fig.org/psr/psr-7/) (Request/Response) and [HTTPlug](http://docs.php-http.org/en/latest/httplug/introduction.html) (HttpClient) interfaces
 
 ## Requirements
 - PHP 5.6 / 7 or HHVM
-- cURL (unless providing a different HTTP client)
+- cURL, unless providing an HTTP client without cURL dependencies (such as [Socket Client](http://docs.php-http.org/en/latest/clients/socket-client.html))
 
 ## Installation
 ```
@@ -84,6 +84,9 @@ if ($heroku->getLastHttpResponse()->getStatusCode() == 206) {
     $page2 = $heroku->get('apps', ['Range' => $nextRange]);
 }
 ```
+
+## Using other Request/Response features
+Underlying HTTP requests and responses are exposed via the `getLastHttpRequest()` and `getLastHttpResponse()` methods. These return instances of [Guzzle's implementations](http://docs.guzzlephp.org/en/latest/psr7.html) of the [PSR-7 Request and Response interfaces](http://www.php-fig.org/psr/psr-7/). Note that the Response body is a stream, so it has [special handling considerations](http://docs.guzzlephp.org/en/latest/psr7.html#streams). Response bodies are rewound by this client so that you can access them again immediately with a call to `getBody()->getContents()` on the Response. The properties exposed via the `getLast...()` methods are nulled initially and whenever you call one of the entry point methods (`get`/`delete`/`head`/`patch`/`post`), then set again as soon as their corresponding objects are generated. So for certain failures (such as a hard network error in the HTTP client) `getLastHttpRequest()` would return the attempted Request object while `getLastHttpResponse()` would return `null`.
 
 ## Reacting to problems
 You may wish to recognize and react to specific error conditions. In this example we use the API's [data integrity mechanism](https://devcenter.heroku.com/articles/platform-api-reference#data-integrity) to require that the requested data hasn't changed since an earlier call. If it has, we will receive a `412 Precondition Failed` response. We handle that case specially, then catch more general situations:
