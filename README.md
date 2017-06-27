@@ -9,6 +9,7 @@ A PHP client for the Heroku Platform API, similar to [platform-api](https://gith
 
 ## Features
 - Reads `HEROKU_API_KEY` for zero-config use
+- Returns JSON-decoded Heroku API responses
 - Exposes response headers (necessary for some API functionality)
 - Uses a built-in cURL-based HTTP client or one that you provide
 - Accepts cURL options and custom request headers
@@ -69,7 +70,7 @@ new HerokuClient([
 ```
 
 ## Making calls
-Make calls using the client's `get()`, `delete()`, `head()`, `patch()`, and `post()` methods. The first argument is always the required `string` path and the last is always an optional `array` of custom headers. `patch()` and `post()` take an `array` or `object` body as the second argument.
+Make calls using the client's `get()`, `delete()`, `head()`, `patch()`, and `post()` methods. The first argument is always the required `string` path and the last is always an optional `array` of custom headers. `patch()` and `post()` take an `array` or `object` body as the second argument. These methods return the `\stdClass` object that results from JSON-decoding the Heroku API response.
 - See the [Quick Start](#quick-start) for examples with and without a body.
 - See the full [Platform API Reference](https://devcenter.heroku.com/articles/platform-api-reference) for a list of all endpoints and their responses.
 
