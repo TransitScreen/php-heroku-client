@@ -117,4 +117,4 @@ try {
 In addition to exceptions thrown directly from this API client, [standardized exceptions](http://docs.php-http.org/en/latest/httplug/exceptions.html) may bubble up from the HTTPlug client implementation in use.
 
 ## Contributing
-Pull Requests are welcome. Consider filing an issue first to discuss your needs/plans. Running `vendor/bin/phpunit` will run all tests. This project follows [the PSR-2 coding standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md), so contributions should do likewise.
+Pull Requests are welcome. Please see our [Contribution Guidelines](https://github.com/TransitScreen/php-heroku-client/blob/master/CONTRIBUTING.md).
