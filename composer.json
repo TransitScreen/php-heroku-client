@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "php": "^5.6 || ^7.0",
+        "php": "^7.0",
         "guzzlehttp/psr7": "^1.6",
         "php-http/message": "^1.5",
         "php-http/curl-client": "^1.7|^2.1",
