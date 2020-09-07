@@ -11,8 +11,6 @@ use Http\Client\Curl\Client as CurlHttpClient;
 use Http\Client\HttpClient;
 use Http\Factory\Guzzle\ResponseFactory;
 use Http\Factory\Guzzle\StreamFactory;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
-use Http\Message\StreamFactory\GuzzleStreamFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
