@@ -18,7 +18,6 @@
         "php-http/message": "^1.5",
         "php-http/curl-client": "^1.7|^2.1",
         "psr/http-message": "^1.0",
-        "php-http/discovery": "^1.10",
         "http-interop/http-factory-guzzle": "^1.0"
     },
     "require-dev": {
