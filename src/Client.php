@@ -38,7 +38,7 @@ class Client
     protected $curlOptions = [];
 
     /**
-     * @var HttpClient $httpClient  Client implementing the HTTPlug interface
+     * @var HttpClient $httpClient  PSR-18 HTTP client
      */
     protected $httpClient;
 

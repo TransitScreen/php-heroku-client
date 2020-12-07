@@ -15,10 +15,10 @@ A PHP client for the Heroku Platform API, similar to [platform-api](https://gith
 - Uses a built-in cURL-based HTTP client or one that you provide
 - Accepts cURL options and custom request headers
 - Throws informative exceptions for authentication, JSON, and HTTP errors
-- Designed around [PSR-7](http://www.php-fig.org/psr/psr-7/) (Request/Response) and [HTTPlug](http://docs.php-http.org/en/latest/httplug/introduction.html) (HttpClient) interfaces
+- Designed around the [PSR-7](http://www.php-fig.org/psr/psr-7/) (Request/Response) and [PSR-18](https://www.php-fig.org/psr/psr-18/) (HTTP client) standards
 
 ## Requirements
-- PHP 5.6 / 7
+- PHP 7 (For PHP 5.6 use our 1.x branch)
 - cURL, unless providing an HTTP client without cURL dependencies (such as [Socket Client](http://docs.php-http.org/en/latest/clients/socket-client.html))
 
 ## Installation
@@ -61,7 +61,7 @@ The client can be configured at instantiation with these settings, all of which 
 new HerokuClient([
     'apiKey' => 'my-api-key',                 // If not set, the client finds HEROKU_API_KEY or fails
     'baseUrl' => 'http://custom.base.url/',   // Defaults to https://api.heroku.com/
-    'httpClient' => $myFavoriteHttpClient,    // Any client implementing HTTPlug's HttpClient interface
+    'httpClient' => $myFavoriteHttpClient,    // Any PSR-18 compatible HTTP client
     'curlOptions' => [                        // Options can be set when using the default HTTP client
         CURLOPT_TIMEOUT => 10,
         CURLOPT_USERAGENT => 'My Agent',
@@ -114,7 +114,7 @@ try {
 - `JsonEncodingException`
 - `MissingApiKeyException`
 
-In addition to exceptions thrown directly from this API client, [standardized exceptions](http://docs.php-http.org/en/latest/httplug/exceptions.html) may bubble up from the HTTPlug client implementation in use.
+In addition to exceptions thrown directly from this API client, [standardized exceptions](https://www.php-fig.org/psr/psr-18/#clientexceptioninterface) may bubble up from the HTTP client.
 
 ## Contributing
 Pull Requests are welcome. Please see our [Contribution Guidelines](CONTRIBUTING.md).
