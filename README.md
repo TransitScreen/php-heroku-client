@@ -9,7 +9,7 @@
 A PHP client for the Heroku Platform API, similar to [platform-api](https://github.com/heroku/platform-api) for Ruby and [node-heroku-client](https://github.com/heroku/node-heroku-client) for Node.js. With it you can create and alter Heroku apps, install or remove add-ons, scale resources up and down, and use any other capabilities documented by the [Platform API Reference](https://devcenter.heroku.com/articles/platform-api-reference).
 
 ## Features
-- Reads `HEROKU_API_KEY` for zero-config use
+- Reads `HEROKU_API_KEY` for zero-config use (deprecated)
 - Returns JSON-decoded Heroku API responses
 - Exposes response headers (necessary for some API functionality)
 - Uses a built-in cURL-based HTTP client or one that you provide
@@ -34,7 +34,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use HerokuClient\Client as HerokuClient;
 
 $heroku = new HerokuClient([
-    'apiKey' => 'my-api-key', // Or set the HEROKU_API_KEY environmental variable
+    'apiKey' => 'my-api-key',
 ]);
 ```
 Find out how many web dynos are currently running:
@@ -59,7 +59,7 @@ $remainingCalls = $heroku->getLastHttpResponse()->getHeaderLine('RateLimit-Remai
 The client can be configured at instantiation with these settings, all of which are optional and have sane defaults:
 ```php
 new HerokuClient([
-    'apiKey' => 'my-api-key',                 // If not set, the client finds HEROKU_API_KEY or fails
+    'apiKey' => 'my-api-key',                 // If not set, the client finds HEROKU_API_KEY (deprecated) or fails
     'baseUrl' => 'http://custom.base.url/',   // Defaults to https://api.heroku.com/
     'httpClient' => $myFavoriteHttpClient,    // Any PSR-18 compatible HTTP client
     'curlOptions' => [                        // Options can be set when using the default HTTP client
