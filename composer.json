@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "php": "^7.1 || ^8.0",
+        "php": "^7.1 | ^8.0",
         "guzzlehttp/psr7": "^1.0",
         "php-http/message": "^1.5",
         "php-http/curl-client": "^2.1",
@@ -24,8 +24,8 @@
         "php-http/mock-client": "^1.0",
         "ext-curl": "*",
         "ext-mbstring": "*",
-        "phpunit/phpunit": "^8.0",
-        "phpunit/php-code-coverage": "^7.0"
+        "phpunit/phpunit": "^9.3",
+        "phpunit/php-code-coverage": "^9.0"
     },
     "autoload": {
         "psr-4": {

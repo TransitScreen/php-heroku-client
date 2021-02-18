@@ -171,8 +171,8 @@ class ClientTest extends TestCase
         $httpRequest = $heroku->getLastHttpRequest();
 
         // Assert that the API key was properly redacted from the Request.
-        $this->assertRegExp('/REDACTED/', $httpRequest->getHeaderLine('Authorization'));
-        $this->assertNotRegExp('/secret/', $httpRequest->getHeaderLine('Authorization'));
+        $this->assertMatchesRegularExpression('/REDACTED/', $httpRequest->getHeaderLine('Authorization'));
+        $this->assertDoesNotMatchRegularExpression('/secret/', $httpRequest->getHeaderLine('Authorization'));
     }
 
     public function testResponseBodyIsRewound()
