@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 class ClientTest extends TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         // Make sure an API key exists in the environment.
         putenv('HEROKU_API_KEY=truthyvalue');
@@ -31,13 +31,27 @@ class ClientTest extends TestCase
         $this->client = new HerokuClient(['httpClient' => $this->mockHttpClient]);
     }
 
+    public function getPrivateProperty($object, $property) {
+        try {
+            $className = get_class($object);
+            $reflection = new ReflectionClass($className);
+        } catch (ReflectionException $e) {
+            throw new Exception($e->getMessage());
+        }
+
+        $property = $reflection->getProperty($property);
+        $property->setAccessible(true);
+
+        return $property->getValue($object);
+    }
+
     public function testApiKeyIsInferredFromTheEnvironment()
-    {
+    {   
         // Assert that a client instantiated without an API key infers one from the environment.
-        $this->assertAttributeEquals(
-            'truthyvalue',
-            'apiKey',
-            new HerokuClient()
+        $apiKey = $this->getPrivateProperty($this->client, 'apiKey');
+        $this->assertSame(
+            $apiKey,
+            'truthyvalue'
         );
     }
 
@@ -125,11 +139,8 @@ class ClientTest extends TestCase
     public function testDefaultHttpClientIsCreated()
     {
         // Assert that a suitable HTTP client will be created if none is provided at instantiation.
-        $this->assertAttributeInstanceOf(
-            HttpClient::class,
-            'httpClient',
-            new HerokuClient()
-        );
+        $httpClient = $this->getPrivateProperty($this->client, 'httpClient');
+        $this->assertInstanceOf(HttpClient::class, $httpClient);
     }
 
     public function testCustomHeadersAreUsed()
