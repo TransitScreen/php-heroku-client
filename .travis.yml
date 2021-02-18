@@ -9,6 +9,7 @@ php:
   - 7.2
   # - 7.3 Affected by https://bugs.xdebug.org/view.php?id=1903
   - 7.4
+  - 8.0
 
 install:
   - composer install
