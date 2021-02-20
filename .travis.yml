@@ -1,4 +1,4 @@
-dist: trusty
+dist: bionic
 
 sudo: false
 
@@ -15,4 +15,4 @@ install:
   - composer install
 
 script:
-- vendor/bin/phpunit
+  - composer test

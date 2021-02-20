@@ -36,5 +36,11 @@
         "psr-4": {
             "HerokuClient\\Test\\": "tests"
         }
+    },
+    "scripts": {
+        "test": [
+          "@putenv XDEBUG_MODE=coverage",
+          "vendor/bin/phpunit"
+        ]
     }
 }
