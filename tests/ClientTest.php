@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 class ClientTest extends TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         // Make sure an API key exists in the environment.
         putenv('HEROKU_API_KEY=truthyvalue');
@@ -31,13 +31,21 @@ class ClientTest extends TestCase
         $this->client = new HerokuClient(['httpClient' => $this->mockHttpClient]);
     }
 
+    public function getPrivateProperty($object, $property)
+    {
+        $reflection = new ReflectionClass(get_class($object));
+        $property = $reflection->getProperty($property);
+        $property->setAccessible(true);
+
+        return $property->getValue($object);
+    }
+
     public function testApiKeyIsInferredFromTheEnvironment()
     {
         // Assert that a client instantiated without an API key infers one from the environment.
-        $this->assertAttributeEquals(
-            'truthyvalue',
-            'apiKey',
-            new HerokuClient()
+        $this->assertSame(
+            $this->getPrivateProperty(new HerokuClient(), 'apiKey'),
+            'truthyvalue'
         );
     }
 
@@ -125,11 +133,8 @@ class ClientTest extends TestCase
     public function testDefaultHttpClientIsCreated()
     {
         // Assert that a suitable HTTP client will be created if none is provided at instantiation.
-        $this->assertAttributeInstanceOf(
-            HttpClient::class,
-            'httpClient',
-            new HerokuClient()
-        );
+        $httpClient = $this->getPrivateProperty(new HerokuClient(), 'httpClient');
+        $this->assertInstanceOf(HttpClient::class, $httpClient);
     }
 
     public function testCustomHeadersAreUsed()
@@ -160,8 +165,8 @@ class ClientTest extends TestCase
         $httpRequest = $heroku->getLastHttpRequest();
 
         // Assert that the API key was properly redacted from the Request.
-        $this->assertRegExp('/REDACTED/', $httpRequest->getHeaderLine('Authorization'));
-        $this->assertNotRegExp('/secret/', $httpRequest->getHeaderLine('Authorization'));
+        $this->assertMatchesRegularExpression('/REDACTED/', $httpRequest->getHeaderLine('Authorization'));
+        $this->assertDoesNotMatchRegularExpression('/secret/', $httpRequest->getHeaderLine('Authorization'));
     }
 
     public function testResponseBodyIsRewound()
