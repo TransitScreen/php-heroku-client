@@ -22,6 +22,10 @@ The component view of this project from [Scrutinizer CI](https://scrutinizer-ci.
 - One pull request per feature.
 
 ## Running Tests
-``` bash
-$ vendor/bin/phpunit
+```
+$ composer test
+```
+Or (depending on how you have Composer installed)
+```
+$ php ./composer.phar test
 ```

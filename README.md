@@ -18,7 +18,7 @@ A PHP client for the Heroku Platform API, similar to [platform-api](https://gith
 - Designed around the [PSR-7](http://www.php-fig.org/psr/psr-7/) (Request/Response) and [PSR-18](https://www.php-fig.org/psr/psr-18/) (HTTP client) standards
 
 ## Requirements
-- PHP 7.3+ (For PHP 5.6 through 7.2 use our 1.x branch)
+- PHP 7.3+ or 8.x (use our 1.x branch for PHP 5.6 and 7.0; 2.x branch for 7.1 and 7.2)
 - cURL, unless providing an HTTP client without cURL dependencies (such as [Socket Client](http://docs.php-http.org/en/latest/clients/socket-client.html))
 
 ## Installation
