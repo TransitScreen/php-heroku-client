@@ -44,7 +44,7 @@ class ClientTest extends TestCase
     {
         // Assert that a client instantiated without an API key infers one from the environment.
         $this->assertSame(
-            $this->getPrivateProperty($this->client, 'apiKey'),
+            $this->getPrivateProperty(new HerokuClient(), 'apiKey'),
             'truthyvalue'
         );
     }
@@ -133,7 +133,7 @@ class ClientTest extends TestCase
     public function testDefaultHttpClientIsCreated()
     {
         // Assert that a suitable HTTP client will be created if none is provided at instantiation.
-        $httpClient = $this->getPrivateProperty($this->client, 'httpClient');
+        $httpClient = $this->getPrivateProperty(new HerokuClient(), 'httpClient');
         $this->assertInstanceOf(HttpClient::class, $httpClient);
     }
 
