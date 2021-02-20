@@ -5,9 +5,7 @@ sudo: false
 language: php
 
 php:
-  - 7.1
-  - 7.2
-  # - 7.3 Affected by https://bugs.xdebug.org/view.php?id=1903
+  - 7.3
   - 7.4
   - 8.0
 
