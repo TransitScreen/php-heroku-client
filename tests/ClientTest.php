@@ -31,14 +31,9 @@ class ClientTest extends TestCase
         $this->client = new HerokuClient(['httpClient' => $this->mockHttpClient]);
     }
 
-    public function getPrivateProperty($object, $property) {
-        try {
-            $className = get_class($object);
-            $reflection = new ReflectionClass($className);
-        } catch (ReflectionException $e) {
-            throw new Exception($e->getMessage());
-        }
-
+    public function getPrivateProperty($object, $property)
+    {
+        $reflection = new ReflectionClass(get_class($object));
         $property = $reflection->getProperty($property);
         $property->setAccessible(true);
 
@@ -46,11 +41,10 @@ class ClientTest extends TestCase
     }
 
     public function testApiKeyIsInferredFromTheEnvironment()
-    {   
+    {
         // Assert that a client instantiated without an API key infers one from the environment.
-        $apiKey = $this->getPrivateProperty($this->client, 'apiKey');
         $this->assertSame(
-            $apiKey,
+            $this->getPrivateProperty($this->client, 'apiKey'),
             'truthyvalue'
         );
     }
