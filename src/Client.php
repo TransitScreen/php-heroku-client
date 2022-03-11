@@ -88,17 +88,17 @@ class Client
     /**
      * @see Client::execute()  For parameter definitions
      */
-    public function get($path, array $headers = [])
+    public function delete($path, array $headers = [])
     {
-        return $this->execute('GET', $path, null, $headers);
+        return $this->execute('DELETE', $path, null, $headers);
     }
 
     /**
      * @see Client::execute()  For parameter definitions
      */
-    public function delete($path, array $headers = [])
+    public function get($path, array $headers = [])
     {
-        return $this->execute('DELETE', $path, null, $headers);
+        return $this->execute('GET', $path, null, $headers);
     }
 
     /**
@@ -123,6 +123,14 @@ class Client
     public function post($path, $body = null, array $headers = [])
     {
         return $this->execute('POST', $path, $body, $headers);
+    }
+
+    /**
+     * @see Client::execute()  For parameter definitions
+     */
+    public function put($path, $body = null, array $headers = [])
+    {
+        return $this->execute('PUT', $path, $body, $headers);
     }
 
     /**

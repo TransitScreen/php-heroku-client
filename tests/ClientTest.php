@@ -184,11 +184,12 @@ class ClientTest extends TestCase
     public function httpMethodsProvider()
     {
         return [
-            ['GET'],
             ['DELETE'],
+            ['GET'],
             ['HEAD'],
             ['PATCH'],
             ['POST'],
+            ['PUT'],
         ];
     }
 }
