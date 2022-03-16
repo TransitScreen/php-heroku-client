@@ -1,10 +1,10 @@
 # PHP Heroku Client
-[![Latest Version](https://img.shields.io/github/release/TransitScreen/php-heroku-client.svg?style=flat-square)](https://github.com/TransitScreen/php-heroku-client/releases)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Build Status](https://img.shields.io/travis/TransitScreen/php-heroku-client.svg?style=flat-square)](https://travis-ci.org/TransitScreen/php-heroku-client)
-[![Quality Score](https://img.shields.io/scrutinizer/g/TransitScreen/php-heroku-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/TransitScreen/php-heroku-client)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/TransitScreen/php-heroku-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/TransitScreen/php-heroku-client)
-[![Downloads](https://img.shields.io/packagist/dt/php-heroku-client/php-heroku-client.svg?style=flat-square)](https://packagist.org/packages/php-heroku-client/php-heroku-client)
+[![Latest Version](https://img.shields.io/github/release/TransitScreen/php-heroku-client.svg)](https://github.com/TransitScreen/php-heroku-client/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
+[![Build Status](https://img.shields.io/github/workflow/status/TransitScreen/php-heroku-client/CI/master)](https://github.com/TransitScreen/php-heroku-client/actions/workflows/ci.yml)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=TransitScreen_php-heroku-client&metric=sqale_rating)](https://sonarcloud.io/summary/overall?id=TransitScreen_php-heroku-client)
+[![Code Coverage](https://img.shields.io/sonar/coverage/TransitScreen_php-heroku-client/master?server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/summary/overall?id=TransitScreen_php-heroku-client)
+[![Downloads](https://img.shields.io/packagist/dt/php-heroku-client/php-heroku-client.svg)](https://packagist.org/packages/php-heroku-client/php-heroku-client)
 
 A PHP client for the Heroku Platform API, similar to [platform-api](https://github.com/heroku/platform-api) for Ruby and [node-heroku-client](https://github.com/heroku/node-heroku-client) for Node.js. With it you can create and alter Heroku apps, install or remove add-ons, scale resources up and down, and use any other capabilities documented by the [Platform API Reference](https://devcenter.heroku.com/articles/platform-api-reference).
 
