@@ -9,7 +9,7 @@ Pull Requests are welcome. Consider [filing an issue](https://github.com/Transit
 We try to maintain a very high level of code quality, which should always be possible with such a small project. Please keep that in mind when proposing changes. We will maintain 100% test coverage, small methods, and good separation of concerns between areas of the code.
 
 ## Structure
-The component view of this project from [Scrutinizer CI](https://scrutinizer-ci.com/) gives a good overview of how it is constructed:
+The component view of this project from gives a good overview of how it is constructed:
 
 ![Code Components](./docs/media/components.png)
 

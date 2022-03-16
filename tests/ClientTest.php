@@ -44,8 +44,8 @@ class ClientTest extends TestCase
     {
         // Assert that a client instantiated without an API key infers one from the environment.
         $this->assertSame(
-            $this->getPrivateProperty(new HerokuClient(), 'apiKey'),
-            'truthyvalue'
+            'truthyvalue',
+            $this->getPrivateProperty(new HerokuClient(), 'apiKey')
         );
     }
 
@@ -140,7 +140,7 @@ class ClientTest extends TestCase
     public function testCustomHeadersAreUsed()
     {
         // Attempt an API call.
-        $response = $this->client->get(
+        $this->client->get(
             'some/path',
             ['TestHeader' => 'TestValue']
         );
@@ -172,7 +172,7 @@ class ClientTest extends TestCase
     public function testResponseBodyIsRewound()
     {
         // Attempt an API call.
-        $response = $this->client->get('some/path');
+        $this->client->get('some/path');
 
         // Assert that the we can access the body without first rewinding the stream.
         $this->assertNotEmpty($this->client->getLastHttpResponse()->getBody()->getContents());
