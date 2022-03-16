@@ -43,7 +43,7 @@ $currentDynos = $heroku->get('apps/my-heroku-app-name/formation/web')->quantity;
 ```
 Scale up:
 ```php
-// patch() and post() accept an array or object as a body.
+// patch(), post(), and put() accept an array or object as a body.
 $heroku->patch(
     'apps/my-heroku-app-name/formation/web',
     ['quantity' => $currentDynos + 1]
@@ -71,7 +71,7 @@ new HerokuClient([
 ```
 
 ## Making calls
-Make calls using the client's `get()`, `delete()`, `head()`, `patch()`, and `post()` methods. The first argument is always the required `string` path and the last is always an optional `array` of custom headers. `patch()` and `post()` take an `array` or `object` body as the second argument. These methods return the `\stdClass` object that results from JSON-decoding the Heroku API response.
+Make calls using the client's `get()`, `delete()`, `head()`, `patch()`, `post()`, and `put()` methods. The first argument is always the required `string` path and the last is always an optional `array` of custom headers. `patch()`, `post()`, and `put()` take an `array` or `object` body as the second argument. These methods return the `\stdClass` object that results from JSON-decoding the Heroku API response.
 - See the [Quick Start](#quick-start) for examples with and without a body.
 - See the full [Platform API Reference](https://devcenter.heroku.com/articles/platform-api-reference) for a list of all endpoints and their responses.
 
@@ -88,7 +88,7 @@ if ($heroku->getLastHttpResponse()->getStatusCode() == 206) {
 ```
 
 ## Using other Request/Response features
-Underlying HTTP requests and responses are exposed via the `getLastHttpRequest()` and `getLastHttpResponse()` methods. These return instances of [Guzzle's implementations](http://docs.guzzlephp.org/en/latest/psr7.html) of the [PSR-7 Request and Response interfaces](http://www.php-fig.org/psr/psr-7/). Note that the Response body is a stream, so it has [special handling considerations](http://docs.guzzlephp.org/en/latest/psr7.html#streams). Response bodies are rewound by this client so that you can access them again immediately with a call to `getBody()->getContents()` on the Response. The properties exposed via the `getLast...()` methods are nulled initially and whenever you call one of the entry point methods (`get`/`delete`/`head`/`patch`/`post`), then set again as soon as their corresponding objects are generated. So for certain failures (such as a hard network error in the HTTP client) `getLastHttpRequest()` would return the attempted Request object while `getLastHttpResponse()` would return `null`.
+Underlying HTTP requests and responses are exposed via the `getLastHttpRequest()` and `getLastHttpResponse()` methods. These return instances of [Guzzle's implementations](http://docs.guzzlephp.org/en/latest/psr7.html) of the [PSR-7 Request and Response interfaces](http://www.php-fig.org/psr/psr-7/). Note that the Response body is a stream, so it has [special handling considerations](http://docs.guzzlephp.org/en/latest/psr7.html#streams). Response bodies are rewound by this client so that you can access them again immediately with a call to `getBody()->getContents()` on the Response. The properties exposed via the `getLast...()` methods are nulled initially and whenever you call one of the entry point methods (`get`/`delete`/`head`/`patch`/`post`/`put`), then set again as soon as their corresponding objects are generated. So for certain failures (such as a hard network error in the HTTP client) `getLastHttpRequest()` would return the attempted Request object while `getLastHttpResponse()` would return `null`.
 
 ## Reacting to problems
 You may wish to recognize and react to specific error conditions. In this example we use the API's [data integrity mechanism](https://devcenter.heroku.com/articles/platform-api-reference#data-integrity) to require that the requested data hasn't changed since an earlier call. If it has, we will receive a `412 Precondition Failed` response. We handle that case specially, then catch more general situations:
