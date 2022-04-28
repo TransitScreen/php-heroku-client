@@ -2,6 +2,7 @@
 
 namespace HerokuClient;
 
+use GuzzleHttp\Psr7\HttpFactory;
 use GuzzleHttp\Psr7\Request;
 use HerokuClient\Exception\BadHttpStatusException;
 use HerokuClient\Exception\JsonDecodingException;
@@ -9,8 +10,6 @@ use HerokuClient\Exception\JsonEncodingException;
 use HerokuClient\Exception\MissingApiKeyException;
 use Http\Client\Curl\Client as CurlHttpClient;
 use Http\Client\HttpClient;
-use Http\Factory\Guzzle\ResponseFactory;
-use Http\Factory\Guzzle\StreamFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -269,8 +268,8 @@ class Client
     protected function buildHttpClient()
     {
         return new CurlHttpClient(
-            new ResponseFactory(),
-            new StreamFactory(),
+            new HttpFactory(),
+            new HttpFactory(),
             $this->curlOptions
         );
     }
