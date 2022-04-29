@@ -18,8 +18,21 @@ A PHP client for the Heroku Platform API, similar to [platform-api](https://gith
 - Designed around the [PSR-7](http://www.php-fig.org/psr/psr-7/) (Request/Response) and [PSR-18](https://www.php-fig.org/psr/psr-18/) (HTTP client) standards
 
 ## Requirements
-- PHP 7.3+ or 8.x (use our 1.x branch for PHP 5.6 and 7.0; 2.x branch for 7.1 and 7.2)
-- cURL, unless providing an HTTP client without cURL dependencies (such as [Socket Client](http://docs.php-http.org/en/latest/clients/socket-client.html))
+All versions are dependent on cURL, unless providing an HTTP client without cURL dependencies (such as [Socket Client](http://docs.php-http.org/en/latest/clients/socket-client.html)). In addition:
+- v4.x
+  - PHP 7.3+ or 8.x
+  - Incompatible with Guzzle _less than_ v7.x (due to guzzlehttp/psr7:^2.0 dependency)
+- v3.x
+  - PHP 7.3+ or 8.x
+  - Incompatible with Guzzle v7.x (due to http-interop/http-factory-guzzle dependency)
+- v2.x
+  - PHP 7.1 or 7.2
+  - Incompatible with Guzzle v7.x (due to http-interop/http-factory-guzzle dependency)
+- v1.x
+  - PHP 5.6 or 7.0
+  - Incompatible with Guzzle v7.x (due to http-interop/http-factory-guzzle dependency)
+
+So modern projects will either use v3 or v4 of this library, dependening on what version of Guzzle they use, if any.
 
 ## Installation
 ```
