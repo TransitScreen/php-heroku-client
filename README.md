@@ -32,7 +32,7 @@ All versions are dependent on cURL, unless providing an HTTP client without cURL
   - PHP 5.6 or 7.0
   - Incompatible with Guzzle v7.x (due to http-interop/http-factory-guzzle dependency)
 
-So modern projects will either use v3 or v4 of this library, dependening on what version of Guzzle they use, if any.
+So modern projects will either use v3 or v4 of this library, depending on what version of Guzzle they use. Note that Guzzle is not required by this library; it's just that it may have dependency conflicts if you do also use it in your project.
 
 ## Installation
 ```
