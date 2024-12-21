@@ -155,7 +155,7 @@ class Client
     /**
      * Execute a call against the Heroku Platform API.
      *
-     * @param string $method        The HTTP method: DELETE|GET|HEAD|PATCH|POST
+     * @param string $method        The HTTP method: DELETE|GET|HEAD|PATCH|POST|PUT
      * @param string $path          The API endpoint path
      * @param array|object $body    Optional array or object to be sent in the request body as JSON
      * @param array $customHeaders  Optional array of headers to be set on the request
@@ -237,8 +237,6 @@ class Client
         $httpResponse->getBody()->rewind(); // Rewind the stream to make future access easier.
 
         // Check for API errors.
-        // @see https://devcenter.heroku.com/articles/platform-api-reference#statuses
-        // @see https://devcenter.heroku.com/articles/platform-api-reference#errors
         if ($httpResponse->getStatusCode() >= 400) {
             throw new BadHttpStatusException(sprintf(
                 'Heroku API error: HTTP code %s [%s] %s',
