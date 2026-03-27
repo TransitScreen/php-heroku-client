@@ -14,7 +14,7 @@ The component view of this project (provided by Scrutinizer CI) gives a good ove
 ![Code Components](./docs/media/components.png)
 
 ## Pull Requests
-- Please follow the [PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md). The easiest way to apply the conventions is to install [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer).
+- Please follow the [PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md). The easiest way to apply the conventions is to install [PHP Code Sniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer).
 - Write any tests called for by your changes.
 - Update code comments and README documentation as appropriate.
 - Consider release effects. We practice semantic versioning, so breaking changes will require a major version release.
